@@ -1,8 +1,8 @@
 {
     "site": {
-        "title": "fluentpos",
+        "title": "Hesabati",
         "fork": "Fork this repository!",
-        "support": "Support fluentpos"
+        "support": "Support Hesabati"
     },
     "layouts": {
         "admin": {
@@ -11,7 +11,9 @@
             "categories": "Categories",
             "products": "Products",
             "peopleSubhead": "People Management",
+            "userManagementSubhead":"User Management",
             "customers": "Customers",
+            "users":"System Users",
             "about": "About"
         }
     },
@@ -21,7 +23,7 @@
     },
     "about": {
         "title": "About",
-        "subtitle": "Everything about fluentpos.",
+        "subtitle": "Everything about Hesabati.",
         "header": "Core Team"
     },
     "settings": {
