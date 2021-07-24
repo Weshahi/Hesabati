@@ -57,6 +57,11 @@
         }
     },
     "components": {
+        "accessdenial": {
+            "header": "Access Denial.",
+            "text": "You do not have permission to access the page you were looking for, contact to system administator.",
+            "button": "Go Home"
+        },
         "notFound": {
             "header": "Page not found.",
             "text": "The page you were looking for could not be found.It might have been removed,renamed or did not exist in the first place.",
@@ -87,5 +92,18 @@
         "medium": "Medium",
         "devto": "DevTo",
         "support": "Support"
+    },
+    "profile": {
+        "title": "Profile",
+        "subtitle": "Manage Profile"
+    },
+    "pos": {
+        "title": "Point Of Sales",
+        "selectCustomer": "Select a Cutomer",
+        "changeCustomer": "Change",
+        "switchToListView": "Switch to List View",
+        "cart": "Cart",
+        "cartEmpty": "Cart is Empty",
+        "startAddingProducts": "Start Adding Products from the Catalog Tab."
     }
 }
