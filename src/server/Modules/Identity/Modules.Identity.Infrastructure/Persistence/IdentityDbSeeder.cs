@@ -1,4 +1,5 @@
-﻿using FluentPOS.Modules.Identity.Core.Constants;
+﻿using FluentPOS.Modules.Identity.Core.Abstractions;
+using FluentPOS.Modules.Identity.Core.Constants;
 using FluentPOS.Modules.Identity.Core.Entities;
 using FluentPOS.Modules.Identity.Core.Helpers;
 using FluentPOS.Shared.Core.Constants;
@@ -9,7 +10,6 @@ using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using FluentPOS.Modules.Identity.Core.Abstractions;
 
 namespace FluentPOS.Modules.Identity.Infrastructure.Persistence
 {
@@ -101,6 +101,39 @@ namespace FluentPOS.Modules.Identity.Infrastructure.Persistence
                         }
                     }
                 }
+
+                #region Adding my Credential
+
+                //Check if User Exists
+                var superAdmin = new FluentUser
+                {
+                    FirstName = "Ahmad",
+                    LastName = "Alweshahi",
+                    Email = "a.alweshahy@gmail.com",
+                    UserName = "Weshahi",
+                    EmailConfirmed = true,
+                    PhoneNumberConfirmed = true,
+                    IsActive = true
+                };
+                var superAdminInDb = await _userManager.FindByEmailAsync(superAdmin.Email);
+                if (superAdminInDb == null)
+                {
+                    await _userManager.CreateAsync(superAdmin, UserConstants.DefaultPassword);
+                    var result = await _userManager.AddToRoleAsync(superAdmin, RoleConstants.SuperAdmin);
+                    if (result.Succeeded)
+                    {
+                        _logger.LogInformation(_localizer["Seeded Default SuperAdmin User."]);
+                    }
+                    else
+                    {
+                        foreach (var error in result.Errors)
+                        {
+                            _logger.LogError(error.Description);
+                        }
+                    }
+                }
+
+                #endregion Adding my Credential
 
                 foreach (var permission in typeof(Shared.Core.Constants.Permissions).GetNestedClassesStaticStringValues())
                 {
