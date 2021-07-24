@@ -9,6 +9,7 @@ import { SharedModule } from 'src/app/core/shared/shared.module';
 import { CustomerService } from './services/customer.service';
 import { CustomerFormComponent } from './components/customer/customer-form/customer-form.component';
 import { PeopleComponent } from './people.component';
+import { SystemUserComponent } from './components/system-user/system-user.component';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { PeopleComponent } from './people.component';
     CustomerComponent,
     SupplierComponent,
     CustomerFormComponent,
-    PeopleComponent
+    PeopleComponent,
+    SystemUserComponent
   ],
   imports: [
     CommonModule,

@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
 
   fillSuperAdminCredentials() {
     this.loginForm = new FormGroup({
-      email: new FormControl('superadmin@fluentpos.com', Validators.required && Validators.email),
+      email: new FormControl('a.alweshahy@gmail.com', Validators.required && Validators.email),
       password: new FormControl('123Pa$$word!', Validators.required)
     });
   }

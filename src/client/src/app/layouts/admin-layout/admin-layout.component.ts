@@ -12,7 +12,7 @@ import { LocalStorageService } from 'src/app/core/services/local-storage.service
 })
 export class AdminLayoutComponent implements OnInit {
 
-  title = 'fluentpos';
+  title = 'Hesabati';
   fullName: string;
   email: string;
 
