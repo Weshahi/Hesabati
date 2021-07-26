@@ -20,6 +20,47 @@ namespace FluentPOS.Modules.People.Infrastructure.Persistence.Migrations
                 .HasAnnotation("ProductVersion", "5.0.7")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("FluentPOS.Modules.People.Core.Entities.Cart", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("CustomerId")
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("Timestamp")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CustomerId");
+
+                    b.ToTable("Carts");
+                });
+
+            modelBuilder.Entity("FluentPOS.Modules.People.Core.Entities.CartItem", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("CartId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("ProductId")
+                        .HasColumnType("uuid");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CartId");
+
+                    b.ToTable("CartItems");
+                });
+
             modelBuilder.Entity("FluentPOS.Modules.People.Core.Entities.Customer", b =>
                 {
                     b.Property<Guid>("Id")
@@ -99,6 +140,28 @@ namespace FluentPOS.Modules.People.Infrastructure.Persistence.Migrations
                     b.ToTable("CustomerExtendedAttributes");
                 });
 
+            modelBuilder.Entity("FluentPOS.Modules.People.Core.Entities.Cart", b =>
+                {
+                    b.HasOne("FluentPOS.Modules.People.Core.Entities.Customer", "Customer")
+                        .WithMany()
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Customer");
+                });
+
+            modelBuilder.Entity("FluentPOS.Modules.People.Core.Entities.CartItem", b =>
+                {
+                    b.HasOne("FluentPOS.Modules.People.Core.Entities.Cart", "Cart")
+                        .WithMany("CartItems")
+                        .HasForeignKey("CartId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Cart");
+                });
+
             modelBuilder.Entity("FluentPOS.Modules.People.Core.Entities.ExtendedAttributes.CustomerExtendedAttribute", b =>
                 {
                     b.HasOne("FluentPOS.Modules.People.Core.Entities.Customer", "Entity")
@@ -108,6 +171,11 @@ namespace FluentPOS.Modules.People.Infrastructure.Persistence.Migrations
                         .IsRequired();
 
                     b.Navigation("Entity");
+                });
+
+            modelBuilder.Entity("FluentPOS.Modules.People.Core.Entities.Cart", b =>
+                {
+                    b.Navigation("CartItems");
                 });
 
             modelBuilder.Entity("FluentPOS.Modules.People.Core.Entities.Customer", b =>
