@@ -10,8 +10,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace FluentPOS.Modules.People.Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(PeopleDbContext))]
-    [Migration("20210726153026_AddCartExtendedAttributes")]
-    partial class AddCartExtendedAttributes
+    [Migration("20210726094533_AddCartToCartItemRelation")]
+    partial class AddCartToCartItemRelation
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -89,59 +89,6 @@ namespace FluentPOS.Modules.People.Infrastructure.Persistence.Migrations
                     b.ToTable("Customers");
                 });
 
-            modelBuilder.Entity("FluentPOS.Modules.People.Core.Entities.ExtendedAttributes.CartExtendedAttribute", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<bool?>("Boolean")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("DateTime")
-                        .HasColumnType("datetime");
-
-                    b.Property<decimal?>("Decimal")
-                        .HasColumnType("numeric");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid>("EntityId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("ExternalId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Group")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("Integer")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Json")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Key")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Text")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<byte>("Type")
-                        .HasColumnType("smallint");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("EntityId");
-
-                    b.ToTable("CartExtendedAttributes");
-                });
-
             modelBuilder.Entity("FluentPOS.Modules.People.Core.Entities.ExtendedAttributes.CustomerExtendedAttribute", b =>
                 {
                     b.Property<Guid>("Id")
@@ -152,7 +99,7 @@ namespace FluentPOS.Modules.People.Infrastructure.Persistence.Migrations
                         .HasColumnType("bit");
 
                     b.Property<DateTime?>("DateTime")
-                        .HasColumnType("datetime");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<decimal?>("Decimal")
                         .HasColumnType("numeric");
@@ -170,7 +117,7 @@ namespace FluentPOS.Modules.People.Infrastructure.Persistence.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("Integer")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
@@ -217,17 +164,6 @@ namespace FluentPOS.Modules.People.Infrastructure.Persistence.Migrations
                     b.Navigation("Cart");
                 });
 
-            modelBuilder.Entity("FluentPOS.Modules.People.Core.Entities.ExtendedAttributes.CartExtendedAttribute", b =>
-                {
-                    b.HasOne("FluentPOS.Modules.People.Core.Entities.Cart", "Entity")
-                        .WithMany("ExtendedAttributes")
-                        .HasForeignKey("EntityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Entity");
-                });
-
             modelBuilder.Entity("FluentPOS.Modules.People.Core.Entities.ExtendedAttributes.CustomerExtendedAttribute", b =>
                 {
                     b.HasOne("FluentPOS.Modules.People.Core.Entities.Customer", "Entity")
@@ -242,8 +178,6 @@ namespace FluentPOS.Modules.People.Infrastructure.Persistence.Migrations
             modelBuilder.Entity("FluentPOS.Modules.People.Core.Entities.Cart", b =>
                 {
                     b.Navigation("CartItems");
-
-                    b.Navigation("ExtendedAttributes");
                 });
 
             modelBuilder.Entity("FluentPOS.Modules.People.Core.Entities.Customer", b =>
