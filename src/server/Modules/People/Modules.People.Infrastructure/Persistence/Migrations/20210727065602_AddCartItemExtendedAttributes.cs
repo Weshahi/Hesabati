@@ -12,20 +12,20 @@ namespace FluentPOS.Modules.People.Infrastructure.Persistence.Migrations
                 schema: "People",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    EntityId = table.Column<Guid>(type: "uuid", nullable: false),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    EntityId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Type = table.Column<byte>(type: "smallint", nullable: false),
-                    Key = table.Column<string>(type: "text", nullable: false),
+                    Key = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Decimal = table.Column<decimal>(type: "numeric", nullable: true),
-                    Text = table.Column<string>(type: "text", nullable: true),
-                    DateTime = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
-                    Json = table.Column<string>(type: "text", nullable: true),
-                    Boolean = table.Column<bool>(type: "boolean", nullable: true),
-                    Integer = table.Column<int>(type: "integer", nullable: true),
-                    ExternalId = table.Column<string>(type: "text", nullable: true),
-                    Group = table.Column<string>(type: "text", nullable: true),
-                    Description = table.Column<string>(type: "text", nullable: true),
-                    IsActive = table.Column<bool>(type: "boolean", nullable: false)
+                    Text = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DateTime = table.Column<DateTime>(type: "datetime", nullable: true),
+                    Json = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Boolean = table.Column<bool>(type: "bit", nullable: true),
+                    Integer = table.Column<int>(type: "int", nullable: true),
+                    ExternalId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Group = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
