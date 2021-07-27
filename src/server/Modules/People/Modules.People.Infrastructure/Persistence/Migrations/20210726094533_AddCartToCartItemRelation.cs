@@ -16,11 +16,11 @@ namespace FluentPOS.Modules.People.Infrastructure.Persistence.Migrations
                 name: "CartId",
                 schema: "People",
                 table: "CartItems",
-                type: "uuid",
+                type: "uniqueidentifier",
                 nullable: false,
                 defaultValue: new Guid("00000000-0000-0000-0000-000000000000"),
                 oldClrType: typeof(Guid),
-                oldType: "uuid",
+                oldType: "uniqueidentifier",
                 oldNullable: true);
 
             migrationBuilder.AddForeignKey(
@@ -40,15 +40,6 @@ namespace FluentPOS.Modules.People.Infrastructure.Persistence.Migrations
                 name: "FK_CartItems_Carts_CartId",
                 schema: "People",
                 table: "CartItems");
-
-            migrationBuilder.AlterColumn<Guid>(
-                name: "CartId",
-                schema: "People",
-                table: "CartItems",
-                type: "uuid",
-                nullable: true,
-                oldClrType: typeof(Guid),
-                oldType: "uuid");
 
             migrationBuilder.AddForeignKey(
                 name: "FK_CartItems_Carts_CartId",
