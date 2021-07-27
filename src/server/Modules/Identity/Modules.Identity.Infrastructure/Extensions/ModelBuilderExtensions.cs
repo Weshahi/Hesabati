@@ -1,4 +1,5 @@
-﻿using FluentPOS.Modules.Identity.Core.Entities;
+﻿using System.Linq;
+using FluentPOS.Modules.Identity.Core.Entities;
 using FluentPOS.Modules.Identity.Core.Entities.ExtendedAttributes;
 using FluentPOS.Shared.Core.Settings;
 using Microsoft.AspNetCore.Identity;
@@ -12,6 +13,16 @@ namespace FluentPOS.Modules.Identity.Infrastructure.Extensions
         public static void ApplyIdentityConfiguration(this ModelBuilder builder, PersistenceSettings persistenceOptions)
         {
             // build model for MSSQL and Postgres
+
+            if (persistenceOptions.UseMsSql)
+            {
+                foreach (var property in builder.Model.GetEntityTypes()
+                    .SelectMany(t => t.GetProperties())
+                    .Where(p => p.ClrType == typeof(decimal) || p.ClrType == typeof(decimal?)))
+                {
+                    property.SetColumnType("decimal(23,2)");
+                }
+            }
 
             builder.Entity<FluentUser>(entity =>
             {
@@ -53,22 +64,10 @@ namespace FluentPOS.Modules.Identity.Infrastructure.Extensions
             builder.Entity<UserExtendedAttribute>(entity =>
             {
                 entity.ToTable("UserExtendedAttributes");
-
-                if (persistenceOptions.UseMsSql)
-                {
-                    entity.Property(p => p.Decimal)
-                        .HasColumnType("decimal(23, 2)");
-                }
             });
             builder.Entity<RoleExtendedAttribute>(entity =>
             {
                 entity.ToTable("RoleExtendedAttributes");
-
-                if (persistenceOptions.UseMsSql)
-                {
-                    entity.Property(p => p.Decimal)
-                        .HasColumnType("decimal(23, 2)");
-                }
             });
         }
     }
