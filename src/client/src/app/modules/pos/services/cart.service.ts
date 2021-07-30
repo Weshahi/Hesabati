@@ -9,6 +9,7 @@ import { Product } from '../models/product';
 export class CartService {
   private cartItems$ = new Subject<Cart[]>();
   private cartItems: Cart[] = [];
+  private currentCustomer: string;
   constructor() { }
   add(product: Product, quantity: number = 1) {
     var foundItem = this.cartItems.find(a => a.productId == product.id);
@@ -48,6 +49,16 @@ export class CartService {
   }
   get(): Observable<Cart[]> {
     return this.cartItems$.asObservable();
+  }
+  loadCurrentCart(): Cart[] {
+    return this.calculate(this.cartItems);
+  }
+  setCurrentCustomer(customerId: string) {
+    this.currentCustomer = customerId;
+    console.log('customerId : ' + customerId);
+  }
+  getCurrentCustomer() {
+    return this.currentCustomer;
   }
   private calculate(cartItems: Cart[]): Cart[] {
     cartItems.forEach(function (part, index, theArray) {

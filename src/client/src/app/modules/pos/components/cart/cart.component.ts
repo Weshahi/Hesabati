@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
+import { ToastrService } from 'ngx-toastr';
 import { Cart } from '../../models/cart';
 import { CartService } from '../../services/cart.service';
 
@@ -12,9 +13,10 @@ export class CartComponent implements OnInit {
   @Input() cart: MatSidenav;
   cartItems: Cart[];
   total: number = 0;
-  constructor(private cartService: CartService) { }
+  constructor(private cartService: CartService, private toastr: ToastrService) { }
 
   ngOnInit(): void {
+    this.loadCurrentCart();
     this.cartService.get().subscribe((data) => {
       this.total = 0;
       this.cartItems = data;
@@ -22,6 +24,12 @@ export class CartComponent implements OnInit {
         this.total += arg.total;
       });
     })
+  }
+  loadCurrentCart() {
+    this.cartItems = this.cartService.loadCurrentCart();
+    this.cartItems.forEach(arg => {
+      this.total += arg.total;
+    });
   }
   increaseQuantity(productId) {
     this.cartService.increase(productId);
@@ -31,5 +39,19 @@ export class CartComponent implements OnInit {
   }
   removeItem(productId) {
     this.cartService.remove(productId);
+  }
+  isCustomerSelected() {
+    const currentCustomer = this.cartService.getCurrentCustomer();
+    if (!currentCustomer) {
+      this.toastr.info('Select a customer first');
+      return false;
+    }
+    return true;
+  }
+  saveOrUpdateCart() {
+    if (this.isCustomerSelected()) {
+      const customerId = this.cartService.getCurrentCustomer();
+
+    }
   }
 }
