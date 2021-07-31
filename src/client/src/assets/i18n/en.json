@@ -13,8 +13,11 @@
             "peopleSubhead": "People Management",
             "userManagementSubhead":"User Management",
             "customers": "Customers",
-            "users":"System Users",
-            "about": "About"
+            "about": "About",
+            "appSubhead": "Application",
+            "roles": "Roles",
+            "users": "Users",
+            "accSubhead": "Access Management"
         }
     },
     "dashboard": {
