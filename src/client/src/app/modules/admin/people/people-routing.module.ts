@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { PermissionGuard } from 'src/app/core/guards/permission.guard';
 import { CustomerComponent } from './components/customer/customer.component';
 import { SystemUserComponent } from './components/system-user/system-user.component';
 
@@ -11,7 +12,11 @@ const routes: Routes = [
   },
   {
     path: 'users',
-    component: SystemUserComponent
+    component: SystemUserComponent,
+    canActivate: [PermissionGuard],
+    data: {
+      allowedPermissions: ['Permissions.Users.View']
+    }
   }
 ];
 
