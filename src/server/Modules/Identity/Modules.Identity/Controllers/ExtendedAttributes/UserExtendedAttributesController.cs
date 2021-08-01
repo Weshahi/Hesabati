@@ -19,7 +19,7 @@ namespace FluentPOS.Modules.Identity.Controllers.ExtendedAttributes
         protected override IMediator Mediator => _mediatorInstance ??= HttpContext.RequestServices.GetService<IMediator>();
 
         [Authorize(Policy = Permissions.UsersExtendedAttributes.ViewAll)]
-        public override Task<IActionResult> GetAllAsync(PaginatedExtendedAttributeFilter<string, FluentUser> filter)
+        public override Task<IActionResult> GetAllAsync(PaginatedExtendedAttributeFilter<Guid, FluentUser> filter)
         {
             return base.GetAllAsync(filter);
         }
