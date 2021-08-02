@@ -5,9 +5,9 @@ using System;
 
 namespace FluentPOS.Modules.Identity.Core.Features.ExtendedAttributes.Validators.Roles
 {
-    public class RolePaginatedExtendedAttributeFilterValidator : PaginatedExtendedAttributeFilterValidator<Guid, FluentRole>
+    public class PaginatedRoleExtendedAttributeFilterValidator : PaginatedExtendedAttributeFilterValidator<Guid, FluentRole>
     {
-        public RolePaginatedExtendedAttributeFilterValidator(IStringLocalizer<RolePaginatedExtendedAttributeFilterValidator> localizer) : base(localizer)
+        public PaginatedRoleExtendedAttributeFilterValidator(IStringLocalizer<PaginatedRoleExtendedAttributeFilterValidator> localizer) : base(localizer)
         {
             // you can override the validation rules here
         }
