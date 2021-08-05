@@ -24,6 +24,7 @@ namespace FluentPOS.Modules.Identity.Core.Features.Users.Events
             AggregateId = user.Id == Guid.Empty
                 ? Guid.NewGuid()
                 : user.Id;
+            RelatedEntities = new[] { typeof(FluentUser) };
         }
     }
 }
