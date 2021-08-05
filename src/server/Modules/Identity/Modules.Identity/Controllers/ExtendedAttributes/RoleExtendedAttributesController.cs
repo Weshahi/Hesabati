@@ -23,7 +23,7 @@ namespace FluentPOS.Modules.Identity.Controllers.ExtendedAttributes
         }
 
         [Authorize(Policy = Permissions.RolesExtendedAttributes.View)]
-        public override Task<IActionResult> GetByIdAsync([FromQuery] GetByIdCacheableFilter<Guid, ExtendedAttribute<string, FluentRole>> filter)
+        public override Task<IActionResult> GetByIdAsync([FromQuery] GetByIdCacheableFilter<Guid, ExtendedAttribute<Guid, FluentRole>> filter)
         {
             return base.GetByIdAsync(filter);
         }
