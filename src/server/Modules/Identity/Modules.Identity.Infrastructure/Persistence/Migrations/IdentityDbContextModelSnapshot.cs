@@ -17,7 +17,7 @@ namespace FluentPOS.Modules.Identity.Infrastructure.Persistence.Migrations
             modelBuilder
                 .HasDefaultSchema("Identity")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.7")
+                .HasAnnotation("ProductVersion", "5.0.8")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("FluentPOS.Modules.Identity.Core.Entities.ExtendedAttributes.RoleExtendedAttribute", b =>
@@ -41,8 +41,8 @@ namespace FluentPOS.Modules.Identity.Infrastructure.Persistence.Migrations
                     b.Property<Guid>("EntityId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("ExternalId")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<Guid?>("ExternalId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Group")
                         .HasColumnType("nvarchar(max)");
@@ -94,8 +94,8 @@ namespace FluentPOS.Modules.Identity.Infrastructure.Persistence.Migrations
                     b.Property<Guid>("EntityId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("ExternalId")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<Guid?>("ExternalId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Group")
                         .HasColumnType("nvarchar(max)");

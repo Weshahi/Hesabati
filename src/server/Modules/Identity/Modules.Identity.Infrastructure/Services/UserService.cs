@@ -1,4 +1,15 @@
-﻿using AutoMapper;
+﻿// --------------------------------------------------------------------------------------------------
+// <copyright file="UserService.cs" company="FluentPOS">
+// Copyright (c) FluentPOS. All rights reserved.
+// The core team: Mukesh Murugan (iammukeshm), Chhin Sras (chhinsras), Nikolay Chebotov (unchase).
+// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+// </copyright>
+// --------------------------------------------------------------------------------------------------
+
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using AutoMapper;
 using FluentPOS.Modules.Identity.Core.Abstractions;
 using FluentPOS.Modules.Identity.Core.Entities;
 using FluentPOS.Shared.Core.Wrapper;
@@ -65,8 +76,10 @@ namespace FluentPOS.Modules.Identity.Infrastructure.Services
                 {
                     userRolesViewModel.Selected = false;
                 }
+
                 viewModel.Add(userRolesViewModel);
             }
+
             var result = new UserRolesResponse { UserRoles = viewModel };
             return await Result<UserRolesResponse>.SuccessAsync(result);
         }

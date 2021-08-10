@@ -1,4 +1,12 @@
-﻿using System.ComponentModel;
+﻿// --------------------------------------------------------------------------------------------------
+// <copyright file="Permissions.cs" company="FluentPOS">
+// Copyright (c) FluentPOS. All rights reserved.
+// The core team: Mukesh Murugan (iammukeshm), Chhin Sras (chhinsras), Nikolay Chebotov (unchase).
+// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+// </copyright>
+// --------------------------------------------------------------------------------------------------
+
+using System.ComponentModel;
 
 namespace FluentPOS.Shared.Core.Constants
 {
@@ -186,12 +194,24 @@ namespace FluentPOS.Shared.Core.Constants
             public const string Update = "Permissions.CartItems.ExtendedAttributes.Update";
             public const string Remove = "Permissions.CartItems.ExtendedAttributes.Remove";
         }
+
         [DisplayName("Event Logs")]
         [Description("Event Logs Permissions")]
         public static class EventLogs
         {
             public const string ViewAll = "Permissions.EventLogs.ViewAll";
             public const string Create = "Permissions.EventLogs.Create";
+        }
+
+        [DisplayName("Sales")]
+        [Description("Sales Permissions")]
+        public static class Sales
+        {
+            public const string View = "Permissions.Sales.View";
+            public const string ViewAll = "Permissions.Sales.ViewAll";
+            public const string Register = "Permissions.Sales.Register";
+            public const string Update = "Permissions.Sales.Update";
+            public const string Remove = "Permissions.Sales.Remove";
         }
     }
 }

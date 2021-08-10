@@ -1,0 +1,24 @@
+{
+  "$schema": "https://raw.githubusercontent.com/DotNetAnalyzers/StyleCopAnalyzers/master/StyleCop.Analyzers/StyleCop.Analyzers/Settings/stylecop.schema.json",
+  "settings": {
+    "orderingRules": {
+      "systemUsingDirectivesFirst": true,
+      "usingDirectivesPlacement": "outsideNamespace"
+    },
+    "documentationRules": {
+      "companyName": "FluentPOS",
+      "copyrightText": "Copyright (c) {companyName}. All rights reserved.\nThe core team: {iammukeshm}, {chhinsras}, {unchase}.\nLicensed under the {licenseName} license. See {licenseFile} file in the project root for full license information.",
+      "headerDecoration": "--------------------------------------------------------------------------------------------------",
+      "variables": {
+        "licenseName": "MIT",
+        "licenseFile": "LICENSE",
+        "iammukeshm": "Mukesh Murugan (iammukeshm)",
+        "chhinsras": "Chhin Sras (chhinsras)",
+        "unchase": "Nikolay Chebotov (unchase)"
+      }
+    },
+    "layoutRules": {
+      "newlineAtEndOfFile": "omit"
+    }
+  }
+}

@@ -1,7 +1,19 @@
+// --------------------------------------------------------------------------------------------------
+// <copyright file="RoleService.cs" company="FluentPOS">
+// Copyright (c) FluentPOS. All rights reserved.
+// The core team: Mukesh Murugan (iammukeshm), Chhin Sras (chhinsras), Nikolay Chebotov (unchase).
+// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+// </copyright>
+// --------------------------------------------------------------------------------------------------
+
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using AutoMapper;
 using FluentPOS.Modules.Identity.Core.Abstractions;
 using FluentPOS.Modules.Identity.Core.Entities;
 using FluentPOS.Modules.Identity.Core.Exceptions;
+using FluentPOS.Modules.Identity.Core.Features.Roles.Events;
 using FluentPOS.Shared.Core.Constants;
 using FluentPOS.Shared.Core.Wrapper;
 using FluentPOS.Shared.DTOs.Identity.Roles;
@@ -52,6 +64,7 @@ namespace FluentPOS.Modules.Identity.Infrastructure.Services
             {
                 return await Result<Guid>.FailAsync(string.Format(_localizer["Not allowed to delete {0} Role."], existingRole.Name));
             }
+
             bool roleIsNotUsed = true;
             var allUsers = await _userManager.Users.ToListAsync();
             foreach (var user in allUsers)
@@ -61,6 +74,7 @@ namespace FluentPOS.Modules.Identity.Infrastructure.Services
                     roleIsNotUsed = false;
                 }
             }
+
             if (roleIsNotUsed)
             {
                 existingRole.AddDomainEvent(new RoleDeletedEvent(id));
@@ -92,7 +106,11 @@ namespace FluentPOS.Modules.Identity.Infrastructure.Services
             if (string.IsNullOrEmpty(request.Id))
             {
                 var existingRole = await _roleManager.FindByNameAsync(request.Name);
-                if (existingRole != null) throw new IdentityException(_localizer["Similar Role already exists."], statusCode: System.Net.HttpStatusCode.BadRequest);
+                if (existingRole != null)
+                {
+                    throw new IdentityException(_localizer["Similar Role already exists."], statusCode: System.Net.HttpStatusCode.BadRequest);
+                }
+
                 var newRole = new FluentRole(request.Name, request.Description);
                 var response = await _roleManager.CreateAsync(newRole);
                 newRole.AddDomainEvent(new RoleAddedEvent(newRole));
@@ -114,6 +132,7 @@ namespace FluentPOS.Modules.Identity.Infrastructure.Services
                 {
                     return await Result<Guid>.SuccessAsync(string.Format(_localizer["Not allowed to modify {0} Role."], existingRole.Name));
                 }
+
                 existingRole.Name = request.Name;
                 existingRole.NormalizedName = request.Name.ToUpper();
                 existingRole.Description = request.Description;
@@ -125,8 +144,7 @@ namespace FluentPOS.Modules.Identity.Infrastructure.Services
 
         public async Task<int> GetCountAsync()
         {
-            var count = await _roleManager.Roles.CountAsync();
-            return count;
+            return await _roleManager.Roles.CountAsync();
         }
     }
 }

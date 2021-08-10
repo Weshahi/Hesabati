@@ -10,10 +10,13 @@ namespace FluentPOS.Modules.Identity.Core.Entities
     {
         public new Guid Id { get; set; }
         public string Description { get; set; }
+
         public string Group { get; set; }
+
         public virtual FluentRole Role { get; set; }
 
         private List<Event> _domainEvents;
+
         public IReadOnlyCollection<Event> DomainEvents => _domainEvents?.AsReadOnly();
 
         public void AddDomainEvent(Event domainEvent)
@@ -32,11 +35,13 @@ namespace FluentPOS.Modules.Identity.Core.Entities
             _domainEvents?.Clear();
         }
 
-        public FluentRoleClaim() : base()
+        public FluentRoleClaim()
+            : base()
         {
         }
 
-        public FluentRoleClaim(string roleClaimDescription = null, string roleClaimGroup = null) : base()
+        public FluentRoleClaim(string roleClaimDescription = null, string roleClaimGroup = null)
+            : base()
         {
             Description = roleClaimDescription;
             Group = roleClaimGroup;

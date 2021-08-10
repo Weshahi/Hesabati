@@ -1,10 +1,19 @@
-﻿using FluentPOS.Modules.Identity.Core.Abstractions;
+﻿// --------------------------------------------------------------------------------------------------
+// <copyright file="RolesController.cs" company="FluentPOS">
+// Copyright (c) FluentPOS. All rights reserved.
+// The core team: Mukesh Murugan (iammukeshm), Chhin Sras (chhinsras), Nikolay Chebotov (unchase).
+// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+// </copyright>
+// --------------------------------------------------------------------------------------------------
+
+using System.Threading.Tasks;
+using FluentPOS.Modules.Identity.Core.Abstractions;
 using FluentPOS.Shared.Core.Constants;
 using FluentPOS.Shared.DTOs.Identity.Roles;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Threading.Tasks;
+using System;
 
 namespace FluentPOS.Modules.Identity.Controllers
 {
@@ -23,7 +32,7 @@ namespace FluentPOS.Modules.Identity.Controllers
         /// <summary>
         /// Get All Roles (basic, admin etc.)
         /// </summary>
-        /// <returns>Status 200 OK</returns>
+        /// <returns>Status 200 OK.</returns>
         [HttpGet]
         [Authorize(Policy = Permissions.Roles.View)]
         public async Task<IActionResult> GetAllAsync()
@@ -33,10 +42,9 @@ namespace FluentPOS.Modules.Identity.Controllers
         }
 
         /// <summary>
-        /// Add a Role
+        /// Add a Role.
         /// </summary>
-        /// <param name="request"></param>
-        /// <returns>Status 200 OK</returns>
+        /// <returns>Status 200 OK.</returns>
         [HttpPost]
         [Authorize(Policy = Permissions.Roles.Create)]
         public async Task<IActionResult> PostAsync(RoleRequest request)
@@ -46,10 +54,9 @@ namespace FluentPOS.Modules.Identity.Controllers
         }
 
         /// <summary>
-        /// Delete a Role
+        /// Delete a Role.
         /// </summary>
-        /// <param name="id"></param>
-        /// <returns>Status 200 OK</returns>
+        /// <returns>Status 200 OK.</returns>
         [HttpDelete("{id}")]
         [Authorize(Policy = Permissions.Roles.Delete)]
         public async Task<IActionResult> DeleteAsync(Guid id)
@@ -59,10 +66,9 @@ namespace FluentPOS.Modules.Identity.Controllers
         }
 
         /// <summary>
-        /// Get Permissions By Role Id
+        /// Get Permissions By Role Id.
         /// </summary>
-        /// <param name="roleId"></param>
-        /// <returns>Status 200 Ok</returns>
+        /// <returns>Status 200 Ok.</returns>
         [HttpGet("permissions/byrole/{roleId}")]
         [Authorize(Policy = Permissions.RoleClaims.View)]
         public async Task<IActionResult> GetPermissionsByRoleIdAsync([FromRoute] Guid roleId)
@@ -72,9 +78,9 @@ namespace FluentPOS.Modules.Identity.Controllers
         }
 
         /// <summary>
-        /// Get All Role Claims
+        /// Get All Role Claims.
         /// </summary>
-        /// <returns>Status 200 Ok</returns>
+        /// <returns>Status 200 Ok.</returns>
         [HttpGet("permissions")]
         [Authorize(Policy = Permissions.RoleClaims.View)]
         public async Task<IActionResult> GetAllClaimsAsync()
@@ -84,10 +90,9 @@ namespace FluentPOS.Modules.Identity.Controllers
         }
 
         /// <summary>
-        /// Get a Role Claim By Id
+        /// Get a Role Claim By Id.
         /// </summary>
-        /// <param name="id"></param>
-        /// <returns>Status 200 Ok</returns>
+        /// <returns>Status 200 Ok.</returns>
         [HttpGet("permissions/{id}")]
         [Authorize(Policy = Permissions.RoleClaims.View)]
         public async Task<IActionResult> GetClaimByIdAsync([FromRoute] Guid id)
@@ -97,10 +102,8 @@ namespace FluentPOS.Modules.Identity.Controllers
         }
 
         /// <summary>
-        /// Edit a Role Claims
+        /// Edit a Role Claims.
         /// </summary>
-        /// <param name="request"></param>
-        /// <returns></returns>
         [HttpPut("permissions/update")]
         [Authorize(Policy = Permissions.RoleClaims.Edit)]
         public async Task<IActionResult> UpdatePermissionsAsync(PermissionRequest request)
@@ -110,10 +113,9 @@ namespace FluentPOS.Modules.Identity.Controllers
         }
 
         /// <summary>
-        /// Delete a Role Claim By Id
+        /// Delete a Role Claim By Id.
         /// </summary>
-        /// <param name="id"></param>
-        /// <returns>Status 200 Ok</returns>
+        /// <returns>Status 200 Ok.</returns>
         [HttpDelete("permissions/{id}")]
         [Authorize(Policy = Permissions.RoleClaims.Delete)]
         public async Task<IActionResult> DeleteClaimByIdAsync([FromRoute] Guid id)

@@ -1,9 +1,17 @@
-﻿#nullable enable
+﻿// --------------------------------------------------------------------------------------------------
+// <copyright file="ExtendedAttribute.cs" company="FluentPOS">
+// Copyright (c) FluentPOS. All rights reserved.
+// The core team: Mukesh Murugan (iammukeshm), Chhin Sras (chhinsras), Nikolay Chebotov (unchase).
+// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+// </copyright>
+// --------------------------------------------------------------------------------------------------
+
+#nullable enable
 #pragma warning disable 8618
 
+using System;
 using FluentPOS.Shared.Core.Contracts;
 using FluentPOS.Shared.DTOs.ExtendedAttributes;
-using System;
 
 namespace FluentPOS.Shared.Core.Domain
 {
@@ -31,7 +39,7 @@ namespace FluentPOS.Shared.Core.Domain
 
         public int? Integer { get; set; }
 
-        public string? ExternalId { get; set; }
+        public Guid? ExternalId { get; set; }
 
         public string? Group { get; set; }
 

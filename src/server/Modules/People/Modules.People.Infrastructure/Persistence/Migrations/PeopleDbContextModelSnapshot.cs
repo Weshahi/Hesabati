@@ -17,7 +17,7 @@ namespace FluentPOS.Modules.People.Infrastructure.Persistence.Migrations
             modelBuilder
                 .HasDefaultSchema("People")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.7")
+                .HasAnnotation("ProductVersion", "5.0.8")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("FluentPOS.Modules.People.Core.Entities.Cart", b =>
@@ -30,7 +30,7 @@ namespace FluentPOS.Modules.People.Infrastructure.Persistence.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("Timestamp")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
@@ -97,10 +97,10 @@ namespace FluentPOS.Modules.People.Infrastructure.Persistence.Migrations
                         .HasColumnType("bit");
 
                     b.Property<DateTime?>("DateTime")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime2");
 
                     b.Property<decimal?>("Decimal")
-                        .HasColumnType("numeric");
+                        .HasColumnType("decimal(23,2)");
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
@@ -108,8 +108,8 @@ namespace FluentPOS.Modules.People.Infrastructure.Persistence.Migrations
                     b.Property<Guid>("EntityId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("ExternalId")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<Guid?>("ExternalId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Group")
                         .HasColumnType("nvarchar(max)");
@@ -131,7 +131,7 @@ namespace FluentPOS.Modules.People.Infrastructure.Persistence.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<byte>("Type")
-                        .HasColumnType("smallint");
+                        .HasColumnType("tinyint");
 
                     b.HasKey("Id");
 
@@ -150,10 +150,10 @@ namespace FluentPOS.Modules.People.Infrastructure.Persistence.Migrations
                         .HasColumnType("bit");
 
                     b.Property<DateTime?>("DateTime")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("datetime2");
 
                     b.Property<decimal?>("Decimal")
-                        .HasColumnType("numeric");
+                        .HasColumnType("decimal(23,2)");
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
@@ -161,8 +161,8 @@ namespace FluentPOS.Modules.People.Infrastructure.Persistence.Migrations
                     b.Property<Guid>("EntityId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("ExternalId")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<Guid?>("ExternalId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Group")
                         .HasColumnType("nvarchar(max)");
@@ -184,7 +184,7 @@ namespace FluentPOS.Modules.People.Infrastructure.Persistence.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<byte>("Type")
-                        .HasColumnType("smallint");
+                        .HasColumnType("tinyint");
 
                     b.HasKey("Id");
 
@@ -214,8 +214,8 @@ namespace FluentPOS.Modules.People.Infrastructure.Persistence.Migrations
                     b.Property<Guid>("EntityId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("ExternalId")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<Guid?>("ExternalId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Group")
                         .HasColumnType("nvarchar(max)");
