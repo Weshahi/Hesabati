@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace FluentPOS.Modules.Catalog.Infrastructure.Persistence.Migrations
 {
-    public partial class Initial : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -117,7 +117,7 @@ namespace FluentPOS.Modules.Catalog.Infrastructure.Persistence.Migrations
                     Price = table.Column<decimal>(type: "decimal(23,2)", nullable: false),
                     Cost = table.Column<decimal>(type: "decimal(23,2)", nullable: false),
                     ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Tax = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Tax = table.Column<string>(type: "decimal(23,2)", nullable: false),
                     TaxMethod = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     BarcodeSymbology = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     IsAlert = table.Column<bool>(type: "bit", nullable: false),

@@ -258,8 +258,8 @@ namespace FluentPOS.Modules.Catalog.Infrastructure.Persistence.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(23,2)");
 
-                    b.Property<string>("Tax")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<decimal>("Tax")
+                        .HasColumnType("decimal(23,2)");
 
                     b.Property<string>("TaxMethod")
                         .HasColumnType("nvarchar(max)");
