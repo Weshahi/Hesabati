@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace FluentPOS.Modules.Catalog.Infrastructure.Persistence.Migrations
 {
-    public partial class initial : Migration
+    public partial class initialcatalogupdates : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -47,11 +47,11 @@ namespace FluentPOS.Modules.Catalog.Infrastructure.Persistence.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     EntityId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Type = table.Column<byte>(type: "smallint", nullable: false),
+                    Type = table.Column<byte>(type: "tinyint", nullable: false),
                     Key = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Decimal = table.Column<decimal>(type: "decimal(23,2)", nullable: true),
                     Text = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    DateTime = table.Column<DateTime>(type: "datetime", nullable: true),
+                    DateTime = table.Column<DateTime>(type: "datetime2", nullable: true),
                     Json = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Boolean = table.Column<bool>(type: "bit", nullable: true),
                     Integer = table.Column<int>(type: "int", nullable: true),
@@ -79,11 +79,11 @@ namespace FluentPOS.Modules.Catalog.Infrastructure.Persistence.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     EntityId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Type = table.Column<byte>(type: "smallint", nullable: false),
+                    Type = table.Column<byte>(type: "tinyint", nullable: false),
                     Key = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Decimal = table.Column<decimal>(type: "decimal(23,2)", nullable: true),
                     Text = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    DateTime = table.Column<DateTime>(type: "datetime", nullable: true),
+                    DateTime = table.Column<DateTime>(type: "datetime2", nullable: true),
                     Json = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Boolean = table.Column<bool>(type: "bit", nullable: true),
                     Integer = table.Column<int>(type: "int", nullable: true),
@@ -117,7 +117,7 @@ namespace FluentPOS.Modules.Catalog.Infrastructure.Persistence.Migrations
                     Price = table.Column<decimal>(type: "decimal(23,2)", nullable: false),
                     Cost = table.Column<decimal>(type: "decimal(23,2)", nullable: false),
                     ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Tax = table.Column<string>(type: "decimal(23,2)", nullable: false),
+                    Tax = table.Column<decimal>(type: "decimal(23,2)", nullable: false),
                     TaxMethod = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     BarcodeSymbology = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     IsAlert = table.Column<bool>(type: "bit", nullable: false),
@@ -150,11 +150,11 @@ namespace FluentPOS.Modules.Catalog.Infrastructure.Persistence.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     EntityId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Type = table.Column<byte>(type: "smallint", nullable: false),
+                    Type = table.Column<byte>(type: "tinyint", nullable: false),
                     Key = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Decimal = table.Column<decimal>(type: "decimal(23,2)", nullable: true),
                     Text = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    DateTime = table.Column<DateTime>(type: "datetime", nullable: true),
+                    DateTime = table.Column<DateTime>(type: "datetime2", nullable: true),
                     Json = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Boolean = table.Column<bool>(type: "bit", nullable: true),
                     Integer = table.Column<int>(type: "int", nullable: true),

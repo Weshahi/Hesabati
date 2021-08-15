@@ -25,7 +25,7 @@ namespace FluentPOS.Modules.Sales.Infrastructure.Persistence.Migrations
                 name: "Id",
                 schema: "Sales",
                 table: "Products",
-                type: "uuid",
+                type: "uniqueidentifier",
                 nullable: false,
                 defaultValue: new Guid("00000000-0000-0000-0000-000000000000"));
 

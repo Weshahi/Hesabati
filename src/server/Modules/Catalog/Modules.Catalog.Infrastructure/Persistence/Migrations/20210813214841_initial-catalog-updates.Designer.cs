@@ -10,15 +10,15 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FluentPOS.Modules.Catalog.Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(CatalogDbContext))]
-    [Migration("20210813125949_initial")]
-    partial class initial
+    [Migration("20210813214841_initial-catalog-updates")]
+    partial class initialcatalogupdates
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasDefaultSchema("Catalog")
-                .HasAnnotation("Relational:MaxIdentifierLength", 63)
+                .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.8")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -72,7 +72,7 @@ namespace FluentPOS.Modules.Catalog.Infrastructure.Persistence.Migrations
                         .HasColumnType("bit");
 
                     b.Property<DateTime?>("DateTime")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime2");
 
                     b.Property<decimal?>("Decimal")
                         .HasColumnType("decimal(23,2)");
@@ -83,7 +83,7 @@ namespace FluentPOS.Modules.Catalog.Infrastructure.Persistence.Migrations
                     b.Property<Guid>("EntityId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("ExternalId")
+                    b.Property<Guid?>("ExternalId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Group")
@@ -106,7 +106,7 @@ namespace FluentPOS.Modules.Catalog.Infrastructure.Persistence.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<byte>("Type")
-                        .HasColumnType("smallint");
+                        .HasColumnType("tinyint");
 
                     b.HasKey("Id");
 
@@ -125,7 +125,7 @@ namespace FluentPOS.Modules.Catalog.Infrastructure.Persistence.Migrations
                         .HasColumnType("bit");
 
                     b.Property<DateTime?>("DateTime")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime2");
 
                     b.Property<decimal?>("Decimal")
                         .HasColumnType("decimal(23,2)");
@@ -136,7 +136,7 @@ namespace FluentPOS.Modules.Catalog.Infrastructure.Persistence.Migrations
                     b.Property<Guid>("EntityId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("ExternalId")
+                    b.Property<Guid?>("ExternalId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Group")
@@ -159,7 +159,7 @@ namespace FluentPOS.Modules.Catalog.Infrastructure.Persistence.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<byte>("Type")
-                        .HasColumnType("smallint");
+                        .HasColumnType("tinyint");
 
                     b.HasKey("Id");
 
@@ -178,7 +178,7 @@ namespace FluentPOS.Modules.Catalog.Infrastructure.Persistence.Migrations
                         .HasColumnType("bit");
 
                     b.Property<DateTime?>("DateTime")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime2");
 
                     b.Property<decimal?>("Decimal")
                         .HasColumnType("decimal(23,2)");
@@ -189,7 +189,7 @@ namespace FluentPOS.Modules.Catalog.Infrastructure.Persistence.Migrations
                     b.Property<Guid>("EntityId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("ExternalId")
+                    b.Property<Guid?>("ExternalId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Group")
@@ -212,7 +212,7 @@ namespace FluentPOS.Modules.Catalog.Infrastructure.Persistence.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<byte>("Type")
-                        .HasColumnType("smallint");
+                        .HasColumnType("tinyint");
 
                     b.HasKey("Id");
 
