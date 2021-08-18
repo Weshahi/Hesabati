@@ -13,6 +13,7 @@ using AutoMapper;
 using FluentPOS.Modules.Sales.Core.Abstractions;
 using FluentPOS.Modules.Sales.Core.Entities;
 using FluentPOS.Shared.Core.IntegrationServices.Catalog;
+using FluentPOS.Shared.Core.IntegrationServices.Inventory;
 using FluentPOS.Shared.Core.IntegrationServices.People;
 using FluentPOS.Shared.Core.Wrapper;
 using MediatR;
@@ -23,6 +24,7 @@ namespace FluentPOS.Modules.Sales.Core.Features.Sales.Commands
     internal sealed class SaleCommandHandler :
         IRequestHandler<RegisterSaleCommand, Result<Guid>>
     {
+        private readonly IStockService _stockService;
         private readonly ICartService _cartService;
         private readonly IProductService _productService;
         private readonly ISalesDbContext _salesContext;
@@ -34,25 +36,21 @@ namespace FluentPOS.Modules.Sales.Core.Features.Sales.Commands
             IStringLocalizer<SaleCommandHandler> localizer,
             ISalesDbContext salesContext,
             ICartService cartService,
-            IProductService productService)
+            IProductService productService,
+            IStockService stockService)
         {
             _mapper = mapper;
             _localizer = localizer;
             _salesContext = salesContext;
             _cartService = cartService;
             _productService = productService;
+            _stockService = stockService;
         }
 
 #pragma warning disable RCS1046 // Asynchronous method name should end with 'Async'.
         public async Task<Result<Guid>> Handle(RegisterSaleCommand command, CancellationToken cancellationToken)
 #pragma warning restore RCS1046 // Asynchronous method name should end with 'Async'.
         {
-            // From CartId
-            // Get Customer ID, Use Integration Services to Get Customer Details
-            // Get CartItem Details, Use Integration Services to Get Product Details
-            // Calculate Tax, Total
-            // Save to Sales.Order,Transactions and Product
-            // Delete CartItem and Cart
             var order = Order.InitializeOrder();
             var cartDetails = await _cartService.GetDetailsAsync(command.CartId);
 
@@ -77,6 +75,11 @@ namespace FluentPOS.Modules.Sales.Core.Features.Sales.Commands
             await _salesContext.Orders.AddAsync(order, cancellationToken);
             await _salesContext.SaveChangesAsync(cancellationToken);
             await _cartService.RemoveCartAsync(command.CartId);
+            foreach(var product in order.Products)
+            {
+                //Inventory Operations Here
+                await _stockService.RecordTransaction(product.ProductId, product.Quantity, product.OrderId.ToString());
+            }
             return await Result<Guid>.SuccessAsync(order.Id, _localizer["Order Created"]);
         }
     }
