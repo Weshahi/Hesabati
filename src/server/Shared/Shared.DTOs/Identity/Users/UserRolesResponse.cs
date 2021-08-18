@@ -6,6 +6,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------
 
+using System;
 using System.Collections.Generic;
 
 namespace FluentPOS.Shared.DTOs.Identity.Users
@@ -17,7 +18,7 @@ namespace FluentPOS.Shared.DTOs.Identity.Users
 
     public class UserRoleModel
     {
-        public string RoleId { get; set; }
+        public Guid RoleId { get; set; }
 
         public string RoleName { get; set; }
 

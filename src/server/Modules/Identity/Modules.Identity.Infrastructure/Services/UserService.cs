@@ -86,7 +86,7 @@ namespace FluentPOS.Modules.Identity.Infrastructure.Services
             return await Result<UserRolesResponse>.SuccessAsync(result);
         }
 
-        public async Task<IResult<string>> UpdateUserRolesAsync(string userId, UserRolesRequest request)
+        public async Task<IResult<string>> UpdateUserRolesAsync(Guid userId, UserRolesRequest request)
         {
             var user = await _userManager.Users.Where(u => u.Id == userId).FirstOrDefaultAsync();
             if (user == null)
@@ -118,7 +118,7 @@ namespace FluentPOS.Modules.Identity.Infrastructure.Services
                 }
             }
 
-            return await Result<string>.SuccessAsync(userId, string.Format(_localizer["User Roles Updated Successfully."]));
+            return await Result<string>.SuccessAsync(userId.ToString(), string.Format(_localizer["User Roles Updated Successfully."]));
         }
     }
 }
