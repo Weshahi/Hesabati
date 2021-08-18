@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace FluentPOS.Modules.Catalog.Infrastructure.Persistence.Migrations
 {
-    public partial class initialcatalogupdates : Migration
+    public partial class initialcatalog : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

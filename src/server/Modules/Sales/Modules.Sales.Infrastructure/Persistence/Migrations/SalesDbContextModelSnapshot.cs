@@ -86,7 +86,7 @@ namespace FluentPOS.Modules.Sales.Infrastructure.Persistence.Migrations
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<Guid>("ProductId")
-                        .HasColumnType("uuid");
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
@@ -120,7 +120,7 @@ namespace FluentPOS.Modules.Sales.Infrastructure.Persistence.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<byte>("PaymentType")
-                        .HasColumnType("smallint");
+                        .HasColumnType("tinyint");
 
                     b.Property<decimal>("TenderedAmount")
                         .HasColumnType("decimal(18,2)");

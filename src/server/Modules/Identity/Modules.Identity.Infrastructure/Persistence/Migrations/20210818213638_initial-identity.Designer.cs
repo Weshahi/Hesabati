@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FluentPOS.Modules.Identity.Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(IdentityDbContext))]
-    [Migration("20210810125353_initial-identity")]
+    [Migration("20210818213638_initial-identity")]
     partial class initialidentity
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

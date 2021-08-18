@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FluentPOS.Shared.Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210810125955_initial-application")]
-    partial class initialapplication
+    [Migration("20210818214251_initial-app")]
+    partial class initialapp
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

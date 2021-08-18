@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace FluentPOS.Shared.Infrastructure.Persistence.Migrations
 {
-    public partial class initialapplication : Migration
+    public partial class initialapp : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

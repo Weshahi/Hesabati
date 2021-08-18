@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FluentPOS.Modules.Catalog.Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(CatalogDbContext))]
-    [Migration("20210813214841_initial-catalog-updates")]
-    partial class initialcatalogupdates
+    [Migration("20210818213522_initial-catalog")]
+    partial class initialcatalog
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
