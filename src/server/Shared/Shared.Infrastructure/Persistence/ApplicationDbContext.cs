@@ -6,6 +6,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------
 
+using FluentPOS.Shared.Core.Entities;
 using FluentPOS.Shared.Core.EventLogging;
 using FluentPOS.Shared.Core.Interfaces;
 using FluentPOS.Shared.Core.Settings;
@@ -30,6 +31,8 @@ namespace FluentPOS.Shared.Infrastructure.Persistence
         }
 
         public DbSet<EventLog> EventLogs { get; set; }
+
+        public DbSet<EntityReference> EntityReferences { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

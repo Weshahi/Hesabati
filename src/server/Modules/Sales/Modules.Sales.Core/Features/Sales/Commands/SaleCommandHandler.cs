@@ -9,9 +9,9 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using AutoMapper;
 using FluentPOS.Modules.Sales.Core.Abstractions;
 using FluentPOS.Modules.Sales.Core.Entities;
+using FluentPOS.Shared.Core.IntegrationServices.Application;
 using FluentPOS.Shared.Core.IntegrationServices.Catalog;
 using FluentPOS.Shared.Core.IntegrationServices.Inventory;
 using FluentPOS.Shared.Core.IntegrationServices.People;
@@ -24,27 +24,27 @@ namespace FluentPOS.Modules.Sales.Core.Features.Sales.Commands
     internal sealed class SaleCommandHandler :
         IRequestHandler<RegisterSaleCommand, Result<Guid>>
     {
+        private readonly IEntityReferenceService _referenceService;
         private readonly IStockService _stockService;
         private readonly ICartService _cartService;
         private readonly IProductService _productService;
         private readonly ISalesDbContext _salesContext;
-        private readonly IMapper _mapper;
         private readonly IStringLocalizer<SaleCommandHandler> _localizer;
 
         public SaleCommandHandler(
-            IMapper mapper,
             IStringLocalizer<SaleCommandHandler> localizer,
             ISalesDbContext salesContext,
             ICartService cartService,
             IProductService productService,
-            IStockService stockService)
+            IStockService stockService,
+            IEntityReferenceService referenceService)
         {
-            _mapper = mapper;
             _localizer = localizer;
             _salesContext = salesContext;
             _cartService = cartService;
             _productService = productService;
             _stockService = stockService;
+            _referenceService = referenceService;
         }
 
 #pragma warning disable RCS1046 // Asynchronous method name should end with 'Async'.
@@ -52,6 +52,8 @@ namespace FluentPOS.Modules.Sales.Core.Features.Sales.Commands
 #pragma warning restore RCS1046 // Asynchronous method name should end with 'Async'.
         {
             var order = Order.InitializeOrder();
+            string referenceNumber = await _referenceService.TrackAsync(order.GetType().Name);
+            order.SetReferenceNumber(referenceNumber);
             var cartDetails = await _cartService.GetDetailsAsync(command.CartId);
 
             // Do all mandatory null checks
@@ -61,8 +63,7 @@ namespace FluentPOS.Modules.Sales.Core.Features.Sales.Commands
             var customer = cartDetails.Data.Customer;
 
             order.AddCustomer(customer);
-            var items = cartDetails.Data.CartItems;
-            foreach (var item in items)
+            foreach (var item in cartDetails.Data.CartItems)
             {
                 var productResponse = await _productService.GetDetailsAsync(item.ProductId);
                 if (productResponse.Succeeded)
@@ -75,12 +76,12 @@ namespace FluentPOS.Modules.Sales.Core.Features.Sales.Commands
             await _salesContext.Orders.AddAsync(order, cancellationToken);
             await _salesContext.SaveChangesAsync(cancellationToken);
             await _cartService.RemoveCartAsync(command.CartId);
-            foreach(var product in order.Products)
+            foreach (var product in order.Products)
             {
-                //Inventory Operations Here
-                await _stockService.RecordTransaction(product.ProductId, product.Quantity, product.OrderId.ToString());
+                await _stockService.RecordTransaction(product.ProductId, product.Quantity, order.ReferenceNumber);
             }
-            return await Result<Guid>.SuccessAsync(order.Id, _localizer["Order Created"]);
+
+            return await Result<Guid>.SuccessAsync(order.Id, string.Format(_localizer["Order {0} Created"], order.ReferenceNumber));
         }
     }
 }
