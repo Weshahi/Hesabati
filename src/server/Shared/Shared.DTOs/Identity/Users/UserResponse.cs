@@ -26,6 +26,8 @@ namespace FluentPOS.Shared.DTOs.Identity.Users
 
         public string PhoneNumber { get; set; }
 
+        public bool PhoneNumberConfirmed { get; set; }
+
         public string ProfilePictureUrl { get; set; }
     }
 }
