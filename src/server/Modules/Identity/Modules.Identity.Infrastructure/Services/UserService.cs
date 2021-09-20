@@ -107,7 +107,7 @@ namespace FluentPOS.Modules.Identity.Infrastructure.Services
 
             if (result.Succeeded)
             {
-                return await Result<Guid>.SuccessAsync(user.Id,  _localizer["User Updated Succesffully."]);
+                return await Result<Guid>.SuccessAsync(user.Id, _localizer["User Updated Succesffully."]);
             }
             else
             {
@@ -120,12 +120,12 @@ namespace FluentPOS.Modules.Identity.Infrastructure.Services
             var user = await _userManager.Users.Where(u => u.Id == userId).FirstOrDefaultAsync();
             if (user == null)
             {
-                return await Result<string>.FailAsync(_localizer["User Not Found."]);
+                return await Result<Guid>.FailAsync(_localizer["User Not Found."]);
             }
 
             if (await _userManager.IsInRoleAsync(user, RoleConstants.SuperAdmin))
             {
-                return await Result<string>.FailAsync(_localizer["Not Allowed."]);
+                return await Result<Guid>.FailAsync(_localizer["Not Allowed."]);
             }
 
             foreach (var userRole in request.UserRoles)
@@ -147,7 +147,7 @@ namespace FluentPOS.Modules.Identity.Infrastructure.Services
                 }
             }
 
-            return await Result<string>.SuccessAsync(userId.ToString(), string.Format(_localizer["User Roles Updated Successfully."]));
+            return await Result<Guid>.SuccessAsync(userId, string.Format(_localizer["User Roles Updated Successfully."]));
         }
     }
 }
